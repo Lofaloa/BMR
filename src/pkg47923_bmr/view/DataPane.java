@@ -1,6 +1,7 @@
 package pkg47923_bmr.view;
 
-import javafx.scene.Node;
+import javafx.geometry.Insets;
+import javafx.scene.text.Font;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
@@ -16,6 +17,7 @@ import pkg47923_bmr.model.LifeStyle;
  */
 public class DataPane extends GridPane {
 
+    private final Label title;
     private final Label sizeLabel;
     private final TextField size;
     private final Label weightLabel;
@@ -33,6 +35,7 @@ public class DataPane extends GridPane {
      * sex and lifestyle.
      */
     public DataPane() {
+        this.title = new Label("Datas");
         this.sizeLabel = new Label("Size (cm)");
         this.size = new TextField();
         this.weightLabel = new Label("Weight (kg)");
@@ -44,6 +47,8 @@ public class DataPane extends GridPane {
         this.male = new RadioButton("Man");
         this.lifeStyleLabel = new Label("Life style");
         this.lifestyle = new ComboBox<>();
+        setGridProperties();
+        setComponentsProperties();
         addComponents();
     }
 
@@ -66,8 +71,8 @@ public class DataPane extends GridPane {
         String str = weight.getText();
         return Double.parseDouble(str);
     }
-    
-        /**
+
+    /**
      * Gets the weight typed by the user.
      *
      * @return the weight typed by the user.
@@ -78,27 +83,49 @@ public class DataPane extends GridPane {
     }
 
     /**
+     * Sets the properties of this grid.
+     */
+    final void setGridProperties() {
+        this.setPadding(new Insets(10, 10, 10, 10));
+    }
+
+    /**
+     * Sets the properties for all this pane components.
+     */
+    final void setComponentsProperties() {
+        this.title.setUnderline(true);
+        this.title.setFont(new Font("Arial", 16));
+        this.size.setPromptText("Enter your size...");
+        this.weight.setPromptText("Enter your weight...");
+        this.age.setPromptText("Enter your age...");
+        this.female.setSelected(true);
+        this.lifestyle.setPromptText("Choose your activity level...");
+    }
+
+    /**
      * Adds all the components to this pane.
      */
     final void addComponents() {
-        this.add(sizeLabel, 1, 0);
-        this.add(size, 2, 0);
-        this.add(weightLabel, 1, 1);
-        this.add(weight, 2, 1);
-        this.add(ageLabel, 1, 2);
-        this.add(age, 2, 2);
-        this.add(sexeLabel, 1, 3);
+        this.add(title, 1, 0);
+        this.add(sizeLabel, 1, 1);
+        this.add(size, 2, 1);
+        this.add(weightLabel, 1, 2);
+        this.add(weight, 2, 2);
+        this.add(ageLabel, 1, 3);
+        this.add(age, 2, 3);
+        this.add(sexeLabel, 1, 4);
         ToggleGroup sexe = new ToggleGroup();
         female.setToggleGroup(sexe);
         male.setToggleGroup(sexe);
-        this.add(female, 2, 3);
-        this.add(male, 3, 3);
-        this.add(lifeStyleLabel, 1, 4);
+        this.add(female, 2, 4);
+        this.add(male, 3, 4);
+        this.add(lifeStyleLabel, 1, 5);
         this.lifestyle.getItems().addAll(LifeStyle.EXTREMELY_ACTIVE,
                 LifeStyle.VERY_ACTIVE,
                 LifeStyle.ACTIVE,
                 LifeStyle.NOT_MUCH_ACTIVE,
                 LifeStyle.SEDENTARY);
+        this.add(lifestyle, 2, 5);
     }
 
 }
