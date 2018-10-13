@@ -51,10 +51,10 @@ public class Main extends Application {
         
         Label label3 = new Label("Sexe");
         ToggleGroup sexe = new ToggleGroup();
-        RadioButton male = new RadioButton("Homme");
-        male.setToggleGroup(sexe);
-        RadioButton female = new RadioButton("Femme");
+        RadioButton female = new RadioButton("Woman");
+        RadioButton male = new RadioButton("Man");
         female.setToggleGroup(sexe);
+        male.setToggleGroup(sexe);
         left.add(label3, 1, 3);
         left.add(male, 2, 3);
         left.add(female, 3, 3);
