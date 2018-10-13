@@ -36,7 +36,7 @@ public class SecondaryPane extends HBox {
      * 
      * @return the weight given by the user.
      */
-    public double getWeigth() {
+    public double getWeight() {
         return data.getWeight();
     }
     
@@ -54,8 +54,8 @@ public class SecondaryPane extends HBox {
      * 
      * @return the gender selected by the user.
      */
-    public String getGender() {
-        return data.getGender();
+    public void getGender() {
+        data.getGender();
     }
     
     /**

@@ -89,8 +89,8 @@ public class DataPane extends GridPane {
      * 
      * @return the gender selected by the user.
      */
-    public String getGender() {
-        return gender.getSelectedToggle().getUserData().toString();
+    public void getGender() {
+        
     }
     
     /**
