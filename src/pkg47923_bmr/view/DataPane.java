@@ -25,6 +25,7 @@ public class DataPane extends GridPane {
     private final Label ageLabel;
     private final TextField age;
     private final Label sexeLabel;
+    private final ToggleGroup gender;
     private final RadioButton female;
     private final RadioButton male;
     private final Label lifeStyleLabel;
@@ -43,6 +44,7 @@ public class DataPane extends GridPane {
         this.ageLabel = new Label("Age (years)");
         this.age = new TextField();
         this.sexeLabel = new Label("Sex");
+        this.gender = new ToggleGroup();
         this.female = new RadioButton("Woman");
         this.male = new RadioButton("Man");
         this.lifeStyleLabel = new Label("Life style");
@@ -81,6 +83,24 @@ public class DataPane extends GridPane {
         String str = age.getText();
         return Integer.parseInt(str);
     }
+    
+    /**
+     * Gets the gender selected by the user.
+     * 
+     * @return the gender selected by the user.
+     */
+    public String getGender() {
+        return gender.getSelectedToggle().getUserData().toString();
+    }
+    
+    /**
+     * Gets the life style selected by the user.
+     * 
+     * @return the life style selected by the user.
+     */
+    public LifeStyle getLifeStyle() {
+        return lifestyle.getValue();
+    }
 
     /**
      * Sets the properties of this grid.
@@ -114,9 +134,8 @@ public class DataPane extends GridPane {
         this.add(ageLabel, 1, 3);
         this.add(age, 2, 3);
         this.add(sexeLabel, 1, 4);
-        ToggleGroup sexe = new ToggleGroup();
-        female.setToggleGroup(sexe);
-        male.setToggleGroup(sexe);
+        female.setToggleGroup(gender);
+        male.setToggleGroup(gender);
         this.add(female, 2, 4);
         this.add(male, 3, 4);
         this.add(lifeStyleLabel, 1, 5);

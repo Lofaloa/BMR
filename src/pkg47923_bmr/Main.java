@@ -4,7 +4,8 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import pkg47923_bmr.view.ContentPane;
+import pkg47923_bmr.view.PrimaryPane;
+import pkg47923_bmr.view.SecondaryPane;
 
 public class Main extends Application {
 
@@ -13,13 +14,7 @@ public class Main extends Application {
         primaryStage.setTitle("Basal Metabolic Rate Calculator");
         primaryStage.setMinWidth(500);
         primaryStage.setMinHeight(200);
-
-        VBox root = new VBox();
-        ContentPane cp = new ContentPane();
-        
-        root.getChildren().add(cp);
-
-        Scene scene = new Scene(root);
+        Scene scene = new Scene(new PrimaryPane());
         primaryStage.setScene(scene);
         primaryStage.show();
     }
