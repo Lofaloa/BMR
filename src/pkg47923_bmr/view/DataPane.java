@@ -60,8 +60,18 @@ public class DataPane extends GridPane {
      * @return the size typed by the user.
      */
     public double getSize() {
-        String str = size.getText();
-        return Double.parseDouble(str);
+        if (size.getText().isEmpty()) {
+            throw new IllegalStateException("Please insert your size.");
+        }
+        if (!size.getText().matches("-?\\d+(\\.\\d+)?")) {
+            throw new IllegalArgumentException("The size should be a number.");
+        }
+        if (Double.parseDouble(size.getText()) < 50
+                || 300 < Double.parseDouble(size.getText())) {
+            throw new IllegalArgumentException("Please enter a valid"
+                    + " size, it should be between 50 cm and 300 cm.");
+        }
+        return Double.parseDouble(size.getText());
     }
 
     /**
@@ -70,8 +80,16 @@ public class DataPane extends GridPane {
      * @return the weight typed by the user.
      */
     public double getWeight() {
-        String str = weight.getText();
-        return Double.parseDouble(str);
+        if (size.getText().isEmpty()) {
+            throw new IllegalStateException("Please insert your weight.");
+        }
+        if (!size.getText().matches("-?\\d+(\\.\\d+)?")) {
+            throw new IllegalArgumentException("The weight should be a number.");
+        }
+        if (Double.parseDouble(size.getText()) <= 1) {
+            throw new IllegalArgumentException("The weight should be more than 1 kg.");
+        }
+        return Double.parseDouble(size.getText());
     }
 
     /**
@@ -80,25 +98,37 @@ public class DataPane extends GridPane {
      * @return the weight typed by the user.
      */
     public int getAge() {
-        String str = age.getText();
-        return Integer.parseInt(str);
+        if (size.getText().isEmpty()) {
+            throw new IllegalStateException("Please insert your age.");
+        }
+        if (!size.getText().matches("^\\d+$")) {
+            throw new IllegalArgumentException("The age should be a number.");
+        }
+        if (Double.parseDouble(size.getText()) <= 1) {
+            throw new IllegalArgumentException("The age should be more than 1");
+        }
+        return Integer.parseInt(age.getText());
     }
-    
+
     /**
      * Gets the gender selected by the user.
-     * 
+     *
      * @return the gender selected by the user.
      */
-    public void getGender() {
-        
+    public String getGender() {
+        RadioButton selectedGender = (RadioButton) gender.getSelectedToggle();
+        return selectedGender.getText();
     }
-    
+
     /**
      * Gets the life style selected by the user.
-     * 
+     *
      * @return the life style selected by the user.
      */
     public LifeStyle getLifeStyle() {
+        if (lifestyle.getSelectionModel().isEmpty()) {
+            throw new IllegalStateException("No lifestyle has been selected.");
+        }
         return lifestyle.getValue();
     }
 

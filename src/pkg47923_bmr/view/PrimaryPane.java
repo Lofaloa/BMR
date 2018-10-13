@@ -4,10 +4,10 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import pkg47923_bmr.model.BasalMetabolicRate;
-import pkg47923_bmr.model.LifeStyle;
 
 /**
  *
@@ -41,24 +41,41 @@ public class PrimaryPane extends VBox {
         submit.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                double size = content.getSize();
-                double weight = content.getWeight();
-                int age = content.getAge();
-                //String gender = content.getGender();
-                //LifeStyle lifestyle = content.getLifeStyle();
-                //double bmr = BasalMetabolicRate.BMR(gender.equals("Woman"),
-                //        weight, size, age);
-                //double calories = BasalMetabolicRate.calories(bmr, lifestyle);
-                System.out.println(size);
-                System.out.println(weight);
-                System.out.println(age);
-                //System.out.println(gender);
-                content.getGender();
-                //System.out.println(lifestyle);
-                //content.setBMR(bmr);
-                //content.setCalories(calories);
+                try {
+                    double bmr = bmr();
+                    content.setBMR(bmr);
+                    content.setCalories(calories(bmr));
+                } catch (IllegalStateException | IllegalArgumentException ex) {
+                    Alert fail = new Alert(Alert.AlertType.INFORMATION);
+                    fail.setHeaderText("Failure");
+                    fail.setContentText(ex.getMessage());
+                    fail.showAndWait();
+                }
             }
         });
+    }
+
+    /**
+     * Gets the basal metabolic rate for the given data.
+     *
+     * @return the basal metabolic rate for the given data.
+     */
+    double bmr() {
+        double size = content.getSize();
+        double weight = content.getWeight();
+        int age = content.getAge();
+        String gender = content.getGender();
+        return BasalMetabolicRate.BMR(gender.equals("Woman"), weight, size, age);
+    }
+
+    /**
+     * Gets the calories needed for the given lifestyle based on the bmr.
+     *
+     * @param bmr is the basal metabolic rate of the user.
+     * @return calories needed by the user.
+     */
+    double calories(double bmr) {
+        return BasalMetabolicRate.calories(bmr, content.getLifeStyle());
     }
 
     /**
