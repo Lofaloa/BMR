@@ -48,6 +48,36 @@ public class DataPane extends GridPane {
     }
 
     /**
+     * Gets the size typed by the user.
+     *
+     * @return the size typed by the user.
+     */
+    public double getSize() {
+        String str = size.getText();
+        return Double.parseDouble(str);
+    }
+
+    /**
+     * Gets the weight typed by the user.
+     *
+     * @return the weight typed by the user.
+     */
+    public double getWeight() {
+        String str = weight.getText();
+        return Double.parseDouble(str);
+    }
+    
+        /**
+     * Gets the weight typed by the user.
+     *
+     * @return the weight typed by the user.
+     */
+    public int getAge() {
+        String str = age.getText();
+        return Integer.parseInt(str);
+    }
+
+    /**
      * Adds all the components to this pane.
      */
     final void addComponents() {
