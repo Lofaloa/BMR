@@ -80,16 +80,17 @@ public class DataPane extends GridPane {
      * @return the weight typed by the user.
      */
     public double getWeight() {
-        if (size.getText().isEmpty()) {
+        System.out.println();
+        if (weight.getText().isEmpty()) {
             throw new IllegalStateException("Please insert your weight.");
         }
-        if (!size.getText().matches("-?\\d+(\\.\\d+)?")) {
+        if (!weight.getText().matches("-?\\d+(\\.\\d+)?")) {
             throw new IllegalArgumentException("The weight should be a number.");
         }
-        if (Double.parseDouble(size.getText()) <= 1) {
+        if (Double.parseDouble(weight.getText()) <= 1) {
             throw new IllegalArgumentException("The weight should be more than 1 kg.");
         }
-        return Double.parseDouble(size.getText());
+        return Double.parseDouble(weight.getText());
     }
 
     /**
