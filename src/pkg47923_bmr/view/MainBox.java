@@ -25,7 +25,7 @@ public class MainBox extends VBox implements Observer {
     public MainBox(Model model) {
         this.model = model;
         this.content = new Content();
-        this.submit = new Button("Submit");
+        this.submit = new Button("Calculer mon BMR");
         setPaneProperties();
         setComponentsProperties();
         addComponents();

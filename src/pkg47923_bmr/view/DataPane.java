@@ -36,18 +36,18 @@ public class DataPane extends GridPane {
      * sex and lifestyle.
      */
     public DataPane() {
-        this.title = new Label("Datas");
-        this.sizeLabel = new Label("Size (cm)");
+        this.title = new Label("Données");
+        this.sizeLabel = new Label("Taille (cm)");
         this.size = new TextField();
-        this.weightLabel = new Label("Weight (kg)");
+        this.weightLabel = new Label("Poids (kg)");
         this.weight = new TextField();
-        this.ageLabel = new Label("Age (years)");
+        this.ageLabel = new Label("Âge");
         this.age = new TextField();
-        this.sexeLabel = new Label("Sex");
+        this.sexeLabel = new Label("Genre");
         this.gender = new ToggleGroup();
-        this.female = new RadioButton("Woman");
-        this.male = new RadioButton("Man");
-        this.lifeStyleLabel = new Label("Life style");
+        this.female = new RadioButton("Femme");
+        this.male = new RadioButton("Homme");
+        this.lifeStyleLabel = new Label("Style de vie");
         this.lifestyle = new ComboBox<>();
         setGridProperties();
         setComponentsProperties();
@@ -61,15 +61,16 @@ public class DataPane extends GridPane {
      */
     public double getSize() {
         if (size.getText().isEmpty()) {
-            throw new IllegalStateException("Please insert your size.");
+            throw new IllegalStateException("Taille nécessaire");
         }
         if (!size.getText().matches("-?\\d+(\\.\\d+)?")) {
-            throw new IllegalArgumentException("The size should be a number.");
+            throw new IllegalArgumentException("La taille doit être une donnée "
+                    + "numérique");
         }
         if (Double.parseDouble(size.getText()) < 50
                 || 300 < Double.parseDouble(size.getText())) {
-            throw new IllegalArgumentException("Please enter a valid"
-                    + " size, it should be between 50 cm and 300 cm.");
+            throw new IllegalArgumentException("Taille invalide, doit être "
+                    + "comprise entre 50 et 300 cm.");
         }
         return Double.parseDouble(size.getText());
     }
@@ -82,13 +83,15 @@ public class DataPane extends GridPane {
     public double getWeight() {
         System.out.println();
         if (weight.getText().isEmpty()) {
-            throw new IllegalStateException("Please insert your weight.");
+            throw new IllegalStateException("Poids nécessaire.");
         }
         if (!weight.getText().matches("-?\\d+(\\.\\d+)?")) {
-            throw new IllegalArgumentException("The weight should be a number.");
+            throw new IllegalArgumentException("Le poids doit être une valeur "
+                    + "numérique.");
         }
         if (Double.parseDouble(weight.getText()) <= 1) {
-            throw new IllegalArgumentException("The weight should be more than 1 kg.");
+            throw new IllegalArgumentException("Poids invalide, doit être"
+                    + " supérieur à 1 kg.");
         }
         return Double.parseDouble(weight.getText());
     }
@@ -100,13 +103,15 @@ public class DataPane extends GridPane {
      */
     public int getAge() {
         if (size.getText().isEmpty()) {
-            throw new IllegalStateException("Please insert your age.");
+            throw new IllegalStateException("Âge nécessaire.");
         }
         if (!size.getText().matches("^\\d+$")) {
-            throw new IllegalArgumentException("The age should be a number.");
+            throw new IllegalArgumentException("L'âge doit être une valeur "
+                    + "numérique.");
         }
         if (Double.parseDouble(size.getText()) <= 1) {
-            throw new IllegalArgumentException("The age should be more than 1");
+            throw new IllegalArgumentException("Âge invalide, doit être supérieur"
+                    + " ou égal à 1 an.");
         }
         return Integer.parseInt(age.getText());
     }
@@ -128,7 +133,7 @@ public class DataPane extends GridPane {
      */
     public LifeStyle getLifeStyle() {
         if (lifestyle.getSelectionModel().isEmpty()) {
-            throw new IllegalStateException("No lifestyle has been selected.");
+            throw new IllegalStateException("Style de vie nécessaire.");
         }
         return lifestyle.getValue();
     }
@@ -148,11 +153,11 @@ public class DataPane extends GridPane {
     final void setComponentsProperties() {
         this.title.setUnderline(true);
         this.title.setFont(new Font("Arial", 16));
-        this.size.setPromptText("Enter your size...");
-        this.weight.setPromptText("Enter your weight...");
-        this.age.setPromptText("Enter your age...");
+        this.size.setPromptText("Taille en centimètres...");
+        this.weight.setPromptText("Poids en kilogrammes...");
+        this.age.setPromptText("Âge...");
         this.female.setSelected(true);
-        this.lifestyle.setPromptText("Choose your activity level...");
+        this.lifestyle.setPromptText("Choix du style de vie...");
     }
 
     /**
@@ -170,14 +175,14 @@ public class DataPane extends GridPane {
         female.setToggleGroup(gender);
         male.setToggleGroup(gender);
         this.add(female, 2, 4);
-        this.add(male, 3, 4);
-        this.add(lifeStyleLabel, 1, 5);
+        this.add(male, 2, 5);
+        this.add(lifeStyleLabel, 1, 6);
         this.lifestyle.getItems().addAll(LifeStyle.EXTREMELY_ACTIVE,
                 LifeStyle.VERY_ACTIVE,
                 LifeStyle.ACTIVE,
                 LifeStyle.NOT_MUCH_ACTIVE,
                 LifeStyle.SEDENTARY);
-        this.add(lifestyle, 2, 5);
+        this.add(lifestyle, 2, 6);
     }
 
 }

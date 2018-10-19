@@ -1,5 +1,6 @@
 package pkg47923_bmr.view;
 
+import java.text.DecimalFormat;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -24,7 +25,7 @@ public class ResultPane extends GridPane {
      * BMR, the second for the calculated amount of calories.
      */
     public ResultPane() {
-        this.title = new Label("Results");
+        this.title = new Label("Résultats");
         this.BMRLabel = new Label("BMR");
         this.BMR = new TextField();
         this.caloriesLabel = new Label("Calories");
@@ -40,7 +41,8 @@ public class ResultPane extends GridPane {
      * @param value the value to set the BMR to.
      */
     public void setBMR(double value) {
-        BMR.setText(Double.toString(value));
+        DecimalFormat df = new DecimalFormat("#.###");
+        BMR.setText(df.format(value));
     }
 
     /**
@@ -49,7 +51,8 @@ public class ResultPane extends GridPane {
      * @param value the value to set the calories to.
      */
     public void setCalories(double value) {
-        calories.setText(Double.toString(value));
+        DecimalFormat df = new DecimalFormat("#.###");
+        calories.setText(df.format(value));
     }
 
     /**
@@ -67,6 +70,8 @@ public class ResultPane extends GridPane {
     final void setComponentsProperties() {
         this.title.setUnderline(true);
         this.title.setFont(new Font("Arial", 16));
+        this.BMR.setEditable(false);
+        this.calories.setEditable(false);
     }
 
     /**
