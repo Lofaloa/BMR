@@ -17,19 +17,23 @@ import pkg47923_bmr.model.Model;
  */
 public class MainBox extends VBox implements Observer {
 
+    private final int WINDOW_HEIGHT = 200;
+    private final int WINDOW_WIDTH = 500;
+
     private final Content content;
     private final Button submit;
 
     private Model model;
 
     public MainBox(Model model) {
+        setMinWidth(WINDOW_WIDTH);
+        setMinHeight(WINDOW_HEIGHT);
         this.model = model;
         this.content = new Content();
         this.submit = new Button("Calculer mon BMR");
         setPaneProperties();
         setComponentsProperties();
         addComponents();
-        model.addObserver(this);
     }
 
     /**

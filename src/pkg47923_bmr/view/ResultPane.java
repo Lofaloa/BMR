@@ -12,7 +12,7 @@ import javafx.scene.text.Font;
  *
  * @author g47923
  */
-public class ResultPane extends GridPane {
+class ResultPane extends GridPane {
 
     private final Label title;
     private final Label BMRLabel;
@@ -40,7 +40,7 @@ public class ResultPane extends GridPane {
      *
      * @param value the value to set the BMR to.
      */
-    public void setBMR(double value) {
+    void setBMR(double value) {
         DecimalFormat df = new DecimalFormat("#.###");
         BMR.setText(df.format(value));
     }
@@ -50,7 +50,7 @@ public class ResultPane extends GridPane {
      *
      * @param value the value to set the calories to.
      */
-    public void setCalories(double value) {
+    void setCalories(double value) {
         DecimalFormat df = new DecimalFormat("#.###");
         calories.setText(df.format(value));
     }

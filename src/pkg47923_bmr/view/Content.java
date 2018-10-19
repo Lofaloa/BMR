@@ -8,7 +8,7 @@ import pkg47923_bmr.model.LifeStyle;
  *
  * @author g47923
  */
-public class Content extends HBox {
+class Content extends HBox {
 
     private final DataPane data;
     private final ResultPane result;
@@ -27,7 +27,7 @@ public class Content extends HBox {
      *
      * @return the size given by the user.
      */
-    public double getSize() {
+    double getSize() {
         return data.getSize();
     }
 
@@ -36,7 +36,7 @@ public class Content extends HBox {
      *
      * @return the weight given by the user.
      */
-    public double getWeight() {
+    double getWeight() {
         return data.getWeight();
     }
 
@@ -45,7 +45,7 @@ public class Content extends HBox {
      *
      * @return the age given by the user.
      */
-    public int getAge() {
+    int getAge() {
         return data.getAge();
     }
 
@@ -54,7 +54,7 @@ public class Content extends HBox {
      *
      * @return the gender selected by the user.
      */
-    public String getGender() {
+    String getGender() {
         return data.getGender();
     }
 
@@ -63,7 +63,7 @@ public class Content extends HBox {
      *
      * @return the life style selected by the user.
      */
-    public LifeStyle getLifeStyle() {
+    LifeStyle getLifeStyle() {
         return data.getLifeStyle();
     }
 
@@ -72,7 +72,7 @@ public class Content extends HBox {
      *
      * @param value is the value to set the BMR to.
      */
-    public void setBMR(double value) {
+    void setBMR(double value) {
         result.setBMR(value);
     }
 
@@ -81,7 +81,7 @@ public class Content extends HBox {
      *
      * @param value is the value to set the calories to.
      */
-    public void setCalories(double value) {
+    void setCalories(double value) {
         result.setCalories(value);
     }
 

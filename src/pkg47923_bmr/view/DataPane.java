@@ -15,7 +15,7 @@ import pkg47923_bmr.model.LifeStyle;
  *
  * @author g47923
  */
-public class DataPane extends GridPane {
+class DataPane extends GridPane {
 
     private final Label title;
     private final Label sizeLabel;
@@ -59,7 +59,7 @@ public class DataPane extends GridPane {
      *
      * @return the size typed by the user.
      */
-    public double getSize() {
+    double getSize() {
         if (size.getText().isEmpty()) {
             throw new IllegalStateException("Taille nécessaire");
         }
@@ -80,7 +80,7 @@ public class DataPane extends GridPane {
      *
      * @return the weight typed by the user.
      */
-    public double getWeight() {
+    double getWeight() {
         System.out.println();
         if (weight.getText().isEmpty()) {
             throw new IllegalStateException("Poids nécessaire.");
@@ -101,7 +101,7 @@ public class DataPane extends GridPane {
      *
      * @return the weight typed by the user.
      */
-    public int getAge() {
+    int getAge() {
         if (size.getText().isEmpty()) {
             throw new IllegalStateException("Âge nécessaire.");
         }
@@ -121,7 +121,7 @@ public class DataPane extends GridPane {
      *
      * @return the gender selected by the user.
      */
-    public String getGender() {
+    String getGender() {
         RadioButton selectedGender = (RadioButton) gender.getSelectedToggle();
         return selectedGender.getText();
     }
@@ -131,7 +131,7 @@ public class DataPane extends GridPane {
      *
      * @return the life style selected by the user.
      */
-    public LifeStyle getLifeStyle() {
+    LifeStyle getLifeStyle() {
         if (lifestyle.getSelectionModel().isEmpty()) {
             throw new IllegalStateException("Style de vie nécessaire.");
         }
