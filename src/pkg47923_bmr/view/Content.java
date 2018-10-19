@@ -8,7 +8,7 @@ import pkg47923_bmr.model.LifeStyle;
  *
  * @author g47923
  */
-public class SecondaryPane extends HBox {
+public class Content extends HBox {
 
     private final DataPane data;
     private final ResultPane result;
@@ -16,7 +16,7 @@ public class SecondaryPane extends HBox {
     /**
      * Initializes this pane with content.
      */
-    public SecondaryPane() {
+    public Content() {
         this.data = new DataPane();
         this.result = new ResultPane();
         addContent();

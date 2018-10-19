@@ -137,6 +137,8 @@ public class DataPane extends GridPane {
      * Sets the properties of this grid.
      */
     final void setGridProperties() {
+        this.setVgap(10);
+        this.setHgap(10);
         this.setPadding(new Insets(10, 10, 10, 10));
     }
 
