@@ -3,7 +3,6 @@ package pkg47923_bmr.view;
 import java.util.Observable;
 import java.util.Observer;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
@@ -50,7 +49,9 @@ public class MainBox extends VBox implements Observer {
     final void setComponentsProperties() {
         submit.setOnAction((ActionEvent event) -> {
             try {
-                model.notifyView();
+                        model.setBmr(content.getGender().equals("Femme"),
+                content.getWeight(), content.getSize(), content.getAge());
+        model.setCalories(content.getLifeStyle());
             } catch (IllegalStateException | IllegalArgumentException ex) {
                 Alert fail = new Alert(Alert.AlertType.INFORMATION);
                 fail.setHeaderText("Failure");
@@ -69,9 +70,6 @@ public class MainBox extends VBox implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-        model.setBmr(content.getGender().equals("Femme"),
-                content.getWeight(), content.getSize(), content.getAge());
-        model.setCalories(content.getLifeStyle());
         content.setBMR(model.getBmr());
         content.setCalories(model.getCalories());
     }

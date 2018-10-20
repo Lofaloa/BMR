@@ -68,6 +68,7 @@ public class Model extends Observable {
         } else {
             this.bmr = manBMR(weight, size, age);
         }
+        notifyView();
     }
 
     /**
@@ -81,6 +82,7 @@ public class Model extends Observable {
         }
         System.out.println(bmr);
         this.calories = lifeStyle.getFactor() * this.bmr;
+        notifyView();
     }
 
     public void notifyView() {
