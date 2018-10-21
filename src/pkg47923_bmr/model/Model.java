@@ -3,7 +3,7 @@ package pkg47923_bmr.model;
 import java.util.Observable;
 
 /**
- * Contains useful for the basal metabolic rate calculation.
+ * Contains useful methods for the basal metabolic rate calculation.
  *
  * @author g47923
  */
@@ -12,6 +12,9 @@ public class Model extends Observable {
     private double bmr;
     private double calories;
 
+    /**
+     * Initializes this model bmr and calories to 0.
+     */
     public Model() {
         this.bmr = 0;
         this.calories = 0;
@@ -85,6 +88,9 @@ public class Model extends Observable {
         notifyView();
     }
 
+    /**
+     * Notifies the view.
+     */
     public void notifyView() {
         setChanged();
         notifyObservers();

@@ -49,7 +49,7 @@ public class MainBox extends VBox implements Observer {
     final void setComponentsProperties() {
         submit.setOnAction((ActionEvent event) -> {
             try {
-                        model.setBmr(content.getGender().equals("Femme"),
+                model.setBmr(content.getGender().equals("Femme"),
                 content.getWeight(), content.getSize(), content.getAge());
         model.setCalories(content.getLifeStyle());
             } catch (IllegalStateException | IllegalArgumentException ex) {

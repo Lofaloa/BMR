@@ -3,7 +3,6 @@ package pkg47923_bmr;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 import pkg47923_bmr.model.Model;
 import pkg47923_bmr.view.MainBox;
@@ -24,7 +23,6 @@ public class Main extends Application {
             System.err.println(ex.getMessage());
             Platform.exit();
         }
-
     }
 
     /**
