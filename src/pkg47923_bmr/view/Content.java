@@ -91,5 +91,13 @@ class Content extends HBox {
     final void addContent() {
         this.getChildren().addAll(data, result);
     }
+    
+    /**
+     * Clears the content of the window.
+     */
+    void clear() {
+        data.clear();
+        result.clear();
+    }
 
 }

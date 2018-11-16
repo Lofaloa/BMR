@@ -137,6 +137,17 @@ class DataPane extends GridPane {
         }
         return lifestyle.getValue();
     }
+   
+    /**
+     * Clears the data.
+     */
+    void clear() {
+        size.clear();
+        weight.clear();
+        age.clear();
+        gender.selectToggle(female);
+        lifestyle.valueProperty().set(null);
+    }
 
     /**
      * Sets the properties of this grid.

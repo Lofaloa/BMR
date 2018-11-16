@@ -56,6 +56,14 @@ class ResultPane extends GridPane {
     }
 
     /**
+     * Clears the results
+     */
+    void clear() {
+        BMR.clear();
+        calories.clear();
+    }
+    
+    /**
      * Sets the properties of this grid.
      */
     final void setGridProperties() {

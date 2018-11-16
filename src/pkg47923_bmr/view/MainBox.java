@@ -3,6 +3,7 @@ package pkg47923_bmr.view;
 import java.util.Observable;
 import java.util.Observer;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
@@ -21,6 +22,7 @@ public class MainBox extends VBox implements Observer {
 
     private final Content content;
     private final Button submit;
+    private final Button clear;
 
     private Model model;
 
@@ -30,6 +32,7 @@ public class MainBox extends VBox implements Observer {
         this.model = model;
         this.content = new Content();
         this.submit = new Button("Calculer mon BMR");
+        this.clear = new Button("Clear");
         setPaneProperties();
         setComponentsProperties();
         addComponents();
@@ -50,8 +53,8 @@ public class MainBox extends VBox implements Observer {
         submit.setOnAction((ActionEvent event) -> {
             try {
                 model.setBmr(content.getGender().equals("Femme"),
-                content.getWeight(), content.getSize(), content.getAge());
-        model.setCalories(content.getLifeStyle());
+                        content.getWeight(), content.getSize(), content.getAge());
+                model.setCalories(content.getLifeStyle());
             } catch (IllegalStateException | IllegalArgumentException ex) {
                 Alert fail = new Alert(Alert.AlertType.INFORMATION);
                 fail.setHeaderText("Failure");
@@ -59,13 +62,21 @@ public class MainBox extends VBox implements Observer {
                 fail.showAndWait();
             }
         });
+        clear.addEventHandler(ActionEvent.ACTION, new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent event) {
+                content.clear();
+            }
+            
+        });
     }
 
     /**
      * Adds the components to this pane.
      */
     final void addComponents() {
-        this.getChildren().addAll(content, submit);
+        this.getChildren().addAll(content, submit, clear);
     }
 
     @Override
