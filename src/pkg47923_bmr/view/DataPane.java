@@ -203,7 +203,7 @@ class DataPane extends GridPane {
      * Sets this pane text fields handler.
      */
     final void setHandlers() {
-        age.addEventFilter(KeyEvent.KEY_TYPED, new EventHandler<KeyEvent>() {
+        this.addEventFilter(KeyEvent.KEY_TYPED, new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
                 if (!Character.isDigit(event.getCharacter().charAt(0))) {
@@ -211,23 +211,6 @@ class DataPane extends GridPane {
                 }
             }
         });
-        weight.addEventFilter(KeyEvent.KEY_TYPED, new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent event) {
-                if (!Character.isDigit(event.getCharacter().charAt(0))) {
-                    event.consume();
-                }
-            }
-        });
-        size.addEventFilter(KeyEvent.KEY_TYPED, new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent event) {
-                if (!Character.isDigit(event.getCharacter().charAt(0))) {
-                    event.consume();
-                }
-            }
-        });
-
     }
 
 }
