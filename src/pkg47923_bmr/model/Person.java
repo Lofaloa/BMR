@@ -7,15 +7,17 @@ import java.util.Observable;
  *
  * @author g47923
  */
-public class Model extends Observable {
+public class Person extends Observable {
 
     private double bmr;
     private double calories;
+    private double weight;
+    private boolean isWoman;
 
     /**
      * Initializes this model bmr and calories to 0.
      */
-    public Model() {
+    public Person() {
         this.bmr = 0;
         this.calories = 0;
     }
@@ -31,6 +33,14 @@ public class Model extends Observable {
 
     public double getCalories() {
         return calories;
+    }
+    
+    public double getWeight() {
+        return weight;
+    }
+    
+    public boolean isWoman() {
+        return isWoman;
     }
 
     /**
@@ -66,6 +76,8 @@ public class Model extends Observable {
      * @param age is the age of the subject.
      */
     public void setBmr(boolean isWoman, double weight, double size, int age) {
+        this.weight = weight;
+        this.isWoman = isWoman;
         if (isWoman) {
             this.bmr = womanBMR(weight, size, age);
         } else {

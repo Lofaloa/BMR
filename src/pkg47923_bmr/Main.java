@@ -4,8 +4,8 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import pkg47923_bmr.model.Model;
-import pkg47923_bmr.view.MainBox;
+import pkg47923_bmr.model.Person;
+import pkg47923_bmr.view.MainPane;
 
 public class Main extends Application {
 
@@ -13,9 +13,9 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
         try {
             primaryStage.setTitle("Basal Metabolic Rate Calculator");
-            Model model = new Model();
-            MainBox main = new MainBox(model);
-            model.addObserver(main);
+            Person user = new Person();
+            MainPane main = new MainPane(user);
+            user.addObserver(main);
             Scene scene = new Scene(main);
             primaryStage.setScene(scene);
             primaryStage.show();

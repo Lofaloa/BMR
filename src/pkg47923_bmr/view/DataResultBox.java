@@ -4,7 +4,6 @@ import java.util.Observable;
 import java.util.Observer;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.event.EventType;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
@@ -13,33 +12,31 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.VBox;
-import pkg47923_bmr.model.Model;
+import pkg47923_bmr.model.Person;
 
 /**
+ * Represents the box the managing the
  *
  * @author g47923
  */
-public class MainBox extends VBox implements Observer {
+public class DataResultBox extends VBox {
 
     private final int WINDOW_HEIGHT = 200;
     private final int WINDOW_WIDTH = 500;
 
-    private final MenuBar menuBar;
     private final Content content;
     private final Button submit;
     private final Button clear;
 
-    private Model model;
+    private Person model;
 
-    public MainBox(Model model) {
+    public DataResultBox(Person model) {
         setMinWidth(WINDOW_WIDTH);
         setMinHeight(WINDOW_HEIGHT);
         this.model = model;
-        this.menuBar = new MenuBar();
         this.content = new Content();
         this.submit = new Button("Calculer mon BMR");
         this.clear = new Button("Clear");
-        setMenu();
         setPaneProperties();
         setComponentsProperties();
         addComponents();
@@ -63,8 +60,8 @@ public class MainBox extends VBox implements Observer {
                         content.getWeight(), content.getSize(), content.getAge());
                 model.setCalories(content.getLifeStyle());
             } catch (IllegalStateException | IllegalArgumentException ex) {
-                Alert fail = new Alert(Alert.AlertType.INFORMATION);
-                fail.setHeaderText("Failure");
+                Alert fail = new Alert(Alert.AlertType.WARNING);
+                fail.setHeaderText("Valeur erronée!");
                 fail.setContentText(ex.getMessage());
                 fail.showAndWait();
             }
@@ -80,30 +77,13 @@ public class MainBox extends VBox implements Observer {
     }
 
     /**
-     * Initializes the menu bar.
-     */
-    final void setMenu() {
-        Menu file = new Menu("File");
-        MenuItem exit = new MenuItem("Exit");
-        exit.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                System.exit(0);
-            }
-        });
-        file.getItems().add(exit);
-        menuBar.getMenus().add(file);
-    }
-
-    /**
      * Adds the components to this pane.
      */
     final void addComponents() {
-        this.getChildren().addAll(menuBar, content, submit, clear);
+        this.getChildren().addAll(content, submit, clear);
     }
 
-    @Override
-    public void update(Observable o, Object arg) {
+    void update() {
         content.setBMR(model.getBmr());
         content.setCalories(model.getCalories());
     }

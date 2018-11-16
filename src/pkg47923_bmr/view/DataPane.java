@@ -84,7 +84,6 @@ class DataPane extends GridPane {
      * @return the weight typed by the user.
      */
     double getWeight() {
-        System.out.println();
         if (weight.getText().isEmpty()) {
             throw new IllegalStateException("Poids nécessaire.");
         }
