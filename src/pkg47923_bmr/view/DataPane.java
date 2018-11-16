@@ -1,5 +1,6 @@
 package pkg47923_bmr.view;
 
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.text.Font;
 import javafx.scene.control.ComboBox;
@@ -7,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import pkg47923_bmr.model.LifeStyle;
 
@@ -52,6 +54,7 @@ class DataPane extends GridPane {
         setGridProperties();
         setComponentsProperties();
         addComponents();
+        setHandlers();
     }
 
     /**
@@ -137,7 +140,7 @@ class DataPane extends GridPane {
         }
         return lifestyle.getValue();
     }
-   
+
     /**
      * Clears the data.
      */
@@ -194,6 +197,37 @@ class DataPane extends GridPane {
                 LifeStyle.NOT_MUCH_ACTIVE,
                 LifeStyle.SEDENTARY);
         this.add(lifestyle, 2, 6);
+    }
+
+    /**
+     * Sets this pane text fields handler.
+     */
+    final void setHandlers() {
+        age.addEventFilter(KeyEvent.KEY_TYPED, new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                if (!Character.isDigit(event.getCharacter().charAt(0))) {
+                    event.consume();
+                }
+            }
+        });
+        weight.addEventFilter(KeyEvent.KEY_TYPED, new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                if (!Character.isDigit(event.getCharacter().charAt(0))) {
+                    event.consume();
+                }
+            }
+        });
+        size.addEventFilter(KeyEvent.KEY_TYPED, new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                if (!Character.isDigit(event.getCharacter().charAt(0))) {
+                    event.consume();
+                }
+            }
+        });
+
     }
 
 }
