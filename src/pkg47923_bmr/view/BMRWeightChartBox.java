@@ -3,14 +3,14 @@ package pkg47923_bmr.view;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.HBox;
 
 /**
- * Represents the pane containing a line chart.
+ * Represents a pane containing a line chart of BMR vs weight.
  *
  * @author g47923
  */
-public class ChartPane extends VBox {
+public class BMRWeightChartBox extends HBox {
 
     private final NumberAxis bmrAxis;
     private final NumberAxis weightAxis;
@@ -18,7 +18,7 @@ public class ChartPane extends VBox {
     private final XYChart.Series male;
     private final XYChart.Series female;
 
-    public ChartPane() {
+    public BMRWeightChartBox() {
         this.bmrAxis = new NumberAxis();
         this.weightAxis = new NumberAxis();
         this.chart = new LineChart<>(weightAxis, bmrAxis);

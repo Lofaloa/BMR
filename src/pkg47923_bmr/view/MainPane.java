@@ -11,6 +11,7 @@ import javafx.scene.layout.BorderPane;
 import pkg47923_bmr.model.Person;
 
 /**
+ * Represents the main layout of this window.
  *
  * @author g47923
  */
@@ -18,21 +19,26 @@ public class MainPane extends BorderPane implements Observer {
 
     private final MenuBar menuBar;
     private final DataResultBox data;
-    private final DataRepresentation representation;
-
+    private final ChartsPane representation;
     private final Person user;
 
+    /**
+     * Initializes this main pane with a user.
+     *
+     * @param user is the user to represent.
+     */
     public MainPane(Person user) {
         this.user = user;
-        data = new DataResultBox(user);
-        representation = new DataRepresentation();
-        menuBar = new MenuBar();
+        this.data = new DataResultBox(user);
+        this.representation = new ChartsPane();
+        this.menuBar = new MenuBar();
         setMenu();
         addContent();
     }
 
     /**
-     * Initializes the menu bar.
+     * Initializes the menu bar with a "<i>File</i>" menu. The unique menu
+     * allows the user to quit this program.
      */
     final void setMenu() {
         Menu file = new Menu("File");
@@ -47,6 +53,10 @@ public class MainPane extends BorderPane implements Observer {
         menuBar.getMenus().add(file);
     }
 
+    /**
+     * Adds content to this pane. This pane contains a menu bar, the data and
+     * its representation.
+     */
     final void addContent() {
         this.setTop(menuBar);
         this.setLeft(data);
@@ -56,7 +66,7 @@ public class MainPane extends BorderPane implements Observer {
     @Override
     public void update(Observable o, Object arg) {
         data.update();
-        representation.addData(user.getBmr(),
+        representation.addDataToCharts(user.getBmr(), user.getCalories(),
                 user.getWeight(), user.isWoman());
     }
 
