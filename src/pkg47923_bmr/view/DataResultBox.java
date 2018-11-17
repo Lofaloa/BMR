@@ -50,20 +50,25 @@ public class DataResultBox extends VBox {
      */
     final void setComponentsProperties() {
         submit.setOnAction((ActionEvent event) -> {
+            System.out.println("submit");
             try {
-                user.setBmr(content.getGender().equals("Femme"),
-                        content.getWeight(), content.getSize(), content.getAge());
-                user.setCalories(content.getLifeStyle());
+                user.setData(content.getGender().equals("Femme"),
+                             content.getWeight(),
+                             content.getSize(),
+                             content.getAge(),
+                             content.getLifeStyle());
             } catch (IllegalStateException | IllegalArgumentException ex) {
                 Alert fail = new Alert(Alert.AlertType.WARNING);
                 fail.setHeaderText("Valeur erronée!");
                 fail.setContentText(ex.getMessage());
                 fail.showAndWait();
             }
+            event.consume();
         });
         clear.addEventHandler(ActionEvent.ACTION, new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                System.out.println("clearing");
                 content.clear();
             }
         });

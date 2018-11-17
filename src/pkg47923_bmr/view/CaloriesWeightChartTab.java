@@ -38,6 +38,7 @@ public class CaloriesWeightChartTab extends Tab {
     }
 
     void addMale(double calories, double kg) {
+        System.out.println("ajout calories male");
         male.getData().add(new XYChart.Data<>(calories, kg));
     }
 

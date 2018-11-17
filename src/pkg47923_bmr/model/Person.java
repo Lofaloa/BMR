@@ -34,11 +34,11 @@ public class Person extends Observable {
     public double getCalories() {
         return calories;
     }
-    
+
     public double getWeight() {
         return weight;
     }
-    
+
     public boolean isWoman() {
         return isWoman;
     }
@@ -68,6 +68,22 @@ public class Person extends Observable {
     }
 
     /**
+     * Calculates this person data.
+     *
+     * @param isWoman tell if this person is a woman.
+     * @param weight the weight of this person.
+     * @param size the size of this person.
+     * @param age the age of this person.
+     * @param lifeStyle the life style of this person.
+     */
+    public void setData(boolean isWoman, double weight, double size, int age,
+            LifeStyle lifeStyle) {
+        setBmr(isWoman, weight, size, age);
+        setCalories(lifeStyle);
+        notifyView();
+    }
+
+    /**
      * Calculates someone's basal metabolic rate.
      *
      * @param isWoman is true if the subject is a woman.
@@ -75,7 +91,7 @@ public class Person extends Observable {
      * @param size is the size of the subject.
      * @param age is the age of the subject.
      */
-    public void setBmr(boolean isWoman, double weight, double size, int age) {
+    void setBmr(boolean isWoman, double weight, double size, int age) {
         this.weight = weight;
         this.isWoman = isWoman;
         if (isWoman) {
@@ -83,7 +99,6 @@ public class Person extends Observable {
         } else {
             this.bmr = manBMR(weight, size, age);
         }
-        notifyView();
     }
 
     /**
@@ -91,13 +106,12 @@ public class Person extends Observable {
      *
      * @param lifeStyle is a given lifestyle.
      */
-    public void setCalories(LifeStyle lifeStyle) {
+    void setCalories(LifeStyle lifeStyle) {
         if (this.bmr == 0) {
             throw new IllegalStateException("BMR has not been calculated.");
         }
         System.out.println(bmr);
         this.calories = lifeStyle.getFactor() * this.bmr;
-        notifyView();
     }
 
     /**
