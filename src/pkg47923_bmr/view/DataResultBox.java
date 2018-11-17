@@ -3,7 +3,6 @@ package pkg47923_bmr.view;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
@@ -30,7 +29,9 @@ public class DataResultBox extends VBox {
         this.content = new Content();
         this.submit = new Button("Calculer mon BMR");
         this.clear = new Button("Clear");
-        setPaneProperties();
+        addSubmitEventHandler();
+        addClearEventHandler();
+        setBoxProperties();
         setComponentsProperties();
         addComponents();
     }
@@ -38,25 +39,19 @@ public class DataResultBox extends VBox {
     /**
      * Sets this pane properties.
      */
-    final void setPaneProperties() {
-        setMinWidth(WINDOW_WIDTH);
-        setMinHeight(WINDOW_HEIGHT);
-        this.setPadding(new Insets(10, 10, 10, 10));
-        this.setAlignment(Pos.CENTER);
+    final void setBoxProperties() {
+        setSpacing(15);
+        setPadding(new Insets(0, 10, 0, 10));
     }
 
-    /**
-     * Sets the components properties of this pane.
-     */
-    final void setComponentsProperties() {
+    private void addSubmitEventHandler() {
         submit.setOnAction((ActionEvent event) -> {
-            System.out.println("submit");
             try {
                 user.setData(content.getGender().equals("Femme"),
-                             content.getWeight(),
-                             content.getSize(),
-                             content.getAge(),
-                             content.getLifeStyle());
+                        content.getWeight(),
+                        content.getSize(),
+                        content.getAge(),
+                        content.getLifeStyle());
             } catch (IllegalStateException | IllegalArgumentException ex) {
                 Alert fail = new Alert(Alert.AlertType.WARNING);
                 fail.setHeaderText("Valeur erronée!");
@@ -65,6 +60,9 @@ public class DataResultBox extends VBox {
             }
             event.consume();
         });
+    }
+
+    private void addClearEventHandler() {
         clear.addEventHandler(ActionEvent.ACTION, new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -75,9 +73,17 @@ public class DataResultBox extends VBox {
     }
 
     /**
+     * Sets the components properties of this pane.
+     */
+    private void setComponentsProperties() {
+        submit.setMinWidth(600);
+        clear.setMinWidth(600);
+    }
+
+    /**
      * Adds the components to this pane.
      */
-    final void addComponents() {
+    private void addComponents() {
         this.getChildren().addAll(content, submit, clear);
     }
 

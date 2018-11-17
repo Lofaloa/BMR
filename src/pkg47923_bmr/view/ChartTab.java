@@ -50,6 +50,7 @@ public class ChartTab extends Tab {
         this.female.setName("Femme");
         chart.setTitle(title);
         setText(title);
+        setClosable(false);
     }
 
     /**
