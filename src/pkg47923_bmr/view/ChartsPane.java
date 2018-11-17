@@ -3,44 +3,65 @@ package pkg47923_bmr.view;
 import javafx.scene.control.TabPane;
 
 /**
- * Represents a box containing data representation.
+ * Represents a pane of tabs that contains 3 charts: BMR vs weight, calories vs
+ * weight and BMR vs height.
  *
  * @author g47923
  */
 public class ChartsPane extends TabPane {
 
-    private final BMRWeightChartTab bmrWeightChartTab;
-    private final CaloriesWeightChartTab caloriesWeightChartTab;
+    private final ChartTab bmrWeightChartTab;
+    private final ChartTab caloriesWeightChartTab;
+    private final ChartTab bmrHeightChartTab;
 
+    /**
+     * Initializes this pane of charts.
+     */
     public ChartsPane() {
-        this.bmrWeightChartTab = new BMRWeightChartTab();
-        this.caloriesWeightChartTab = new CaloriesWeightChartTab();
+        this.bmrWeightChartTab = new ChartTab("BMR par rapport au poids",
+                "Poids (kg)", "BMR");
+        this.caloriesWeightChartTab = new ChartTab("Calories par rapport au poids",
+                "Poids (kg)", "Calories");
+        this.bmrHeightChartTab = new ChartTab("BMR par rapport à la taille",
+                "Taille (cm)", "BMR");
         addContent();
     }
 
-    void addDataToCharts(double bmr, double calories, double weight, boolean isFemale) {
-        addDataToBMRWeightChart(bmr, weight, isFemale);
-        addDataToCaloriesWeightChart(calories, weight, isFemale);
+    /**
+     * Adds the given data to the different charts.
+     *
+     * @param bmr is the BMR of the new data.
+     * @param calories is the calories of the new data.
+     * @param weight is the weight of the new data.
+     * @param height is the height of the new data.
+     * @param isFemale true if the data should be added to the female line.
+     */
+    void addDataToCharts(double bmr, double calories, double weight,
+            double height, boolean isFemale) {
+        addDataTo(bmrWeightChartTab, weight, bmr, isFemale);
+        addDataTo(caloriesWeightChartTab, weight, calories, isFemale);
+        addDataTo(bmrHeightChartTab, height, bmr, isFemale);
     }
 
-    private void addDataToBMRWeightChart(double bmr, double weight, boolean isFemale) {
+    /**
+     * Adds a new data to the given tab.
+     *
+     * @param tab is the tab that contains the chart to add the new data to.
+     * @param x is the data of the x axis.
+     * @param y is the data of the y axis.
+     * @param isFemale true if the data should be added on the female line.
+     */
+    private void addDataTo(ChartTab tab, double x, double y, boolean isFemale) {
         if (isFemale) {
-            bmrWeightChartTab.addFemale(bmr, weight);
+            tab.addFemale(x, y);
         } else {
-            bmrWeightChartTab.addMale(bmr, weight);
-        }
-    }
-
-    private void addDataToCaloriesWeightChart(double calories, double weight, boolean isFemale) {
-        if (isFemale) {
-            caloriesWeightChartTab.addFemale(calories, weight);
-        } else {
-            caloriesWeightChartTab.addMale(calories, weight);
+            tab.addMale(x, y);
         }
     }
 
     final void addContent() {
-        this.getTabs().addAll(bmrWeightChartTab, caloriesWeightChartTab);
+        this.getTabs().addAll(bmrWeightChartTab, caloriesWeightChartTab,
+                bmrHeightChartTab);
     }
 
 }

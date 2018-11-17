@@ -11,8 +11,11 @@ public class Person extends Observable {
 
     private double bmr;
     private double calories;
+    private int age;
     private double weight;
+    private double height;
     private boolean isWoman;
+    private LifeStyle lifestyle;
 
     /**
      * Initializes this model bmr and calories to 0.
@@ -39,8 +42,62 @@ public class Person extends Observable {
         return weight;
     }
 
+    public double getHeight() {
+        return height;
+    }
+
     public boolean isWoman() {
         return isWoman;
+    }
+
+    /**
+     * Calculates this person data.
+     *
+     * @param isWoman tell if this person is a woman.
+     * @param weight the weight of this person.
+     * @param height the size of this person.
+     * @param age the age of this person.
+     * @param lifeStyle the life style of this person.
+     */
+    public void setData(boolean isWoman, double weight, double height, int age,
+            LifeStyle lifeStyle) {
+        this.weight = weight;
+        this.height = height;
+        this.age = age;
+        this.lifestyle = lifeStyle;
+        this.isWoman = isWoman;
+        setBmr(isWoman, weight, height, age);
+        setCalories(lifeStyle);
+        notifyView();
+    }
+
+    /**
+     * Calculates someone's basal metabolic rate.
+     *
+     * @param isWoman is true if the subject is a woman.
+     * @param weight is the weight of the subject.
+     * @param size is the size of the subject.
+     * @param age is the age of the subject.
+     */
+    private void setBmr(boolean isWoman, double weight, double size, int age) {
+        if (isWoman) {
+            this.bmr = womanBMR(weight, size, age);
+        } else {
+            this.bmr = manBMR(weight, size, age);
+        }
+    }
+
+    /**
+     * Calculates the number of calories needed given a basal metabolic rate.
+     *
+     * @param lifeStyle is a given lifestyle.
+     */
+    private void setCalories(LifeStyle lifeStyle) {
+        if (this.bmr == 0) {
+            throw new IllegalStateException("BMR has not been calculated.");
+        }
+        System.out.println(bmr);
+        this.calories = lifeStyle.getFactor() * this.bmr;
     }
 
     /**
@@ -68,56 +125,9 @@ public class Person extends Observable {
     }
 
     /**
-     * Calculates this person data.
-     *
-     * @param isWoman tell if this person is a woman.
-     * @param weight the weight of this person.
-     * @param size the size of this person.
-     * @param age the age of this person.
-     * @param lifeStyle the life style of this person.
-     */
-    public void setData(boolean isWoman, double weight, double size, int age,
-            LifeStyle lifeStyle) {
-        setBmr(isWoman, weight, size, age);
-        setCalories(lifeStyle);
-        notifyView();
-    }
-
-    /**
-     * Calculates someone's basal metabolic rate.
-     *
-     * @param isWoman is true if the subject is a woman.
-     * @param weight is the weight of the subject.
-     * @param size is the size of the subject.
-     * @param age is the age of the subject.
-     */
-    void setBmr(boolean isWoman, double weight, double size, int age) {
-        this.weight = weight;
-        this.isWoman = isWoman;
-        if (isWoman) {
-            this.bmr = womanBMR(weight, size, age);
-        } else {
-            this.bmr = manBMR(weight, size, age);
-        }
-    }
-
-    /**
-     * Calculates the number of calories needed given a basal metabolic rate.
-     *
-     * @param lifeStyle is a given lifestyle.
-     */
-    void setCalories(LifeStyle lifeStyle) {
-        if (this.bmr == 0) {
-            throw new IllegalStateException("BMR has not been calculated.");
-        }
-        System.out.println(bmr);
-        this.calories = lifeStyle.getFactor() * this.bmr;
-    }
-
-    /**
      * Notifies the view.
      */
-    public void notifyView() {
+    private void notifyView() {
         setChanged();
         notifyObservers();
     }

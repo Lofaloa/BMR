@@ -23,7 +23,7 @@ public class DataResultBox extends VBox {
     private final Button submit;
     private final Button clear;
 
-    private Person user;
+    private final Person user;
 
     public DataResultBox(Person user) {
         this.user = user;

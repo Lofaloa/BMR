@@ -67,8 +67,11 @@ public class MainPane extends BorderPane implements Observer {
     public void update(Observable o, Object arg) {
         System.out.println("UPDATE");
         data.update();
-        representation.addDataToCharts(user.getBmr(), user.getCalories(),
-                user.getWeight(), user.isWoman());
+        representation.addDataToCharts(user.getBmr(),
+                                       user.getCalories(),
+                                       user.getWeight(),
+                                       user.getHeight(),
+                                       user.isWoman());
     }
 
 }
