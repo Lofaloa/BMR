@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>CaloriesWeightChartTab.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;47923_BMR&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">pkg47923_bmr.view</a> &gt; <span class="el_source">CaloriesWeightChartTab.java</span></div><h1>CaloriesWeightChartTab.java</h1><pre class="source lang-java linenums">package pkg47923_bmr.view;
+
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
+import javafx.scene.control.Tab;
+
+/**
+ * Represents a pane containing a line chart of calories vs weight.
+ *
+ * @author g47923
+ */
+public class CaloriesWeightChartTab extends Tab {
+
+    private final NumberAxis caloriesAxis;
+    private final NumberAxis weightAxis;
+    private final LineChart&lt;Number, Number&gt; chart;
+    private final XYChart.Series male;
+    private final XYChart.Series female;
+
+<span class="nc" id="L21">    public CaloriesWeightChartTab() {</span>
+<span class="nc" id="L22">        this.caloriesAxis = new NumberAxis();</span>
+<span class="nc" id="L23">        this.weightAxis = new NumberAxis();</span>
+<span class="nc" id="L24">        this.chart = new LineChart&lt;&gt;(weightAxis, caloriesAxis);</span>
+<span class="nc" id="L25">        this.male = new XYChart.Series&lt;&gt;();</span>
+<span class="nc" id="L26">        this.male.setName(&quot;Homme&quot;);</span>
+<span class="nc" id="L27">        this.female = new XYChart.Series&lt;&gt;();</span>
+<span class="nc" id="L28">        this.female.setName(&quot;Femme&quot;);</span>
+<span class="nc" id="L29">        addContent();</span>
+<span class="nc" id="L30">        setProperties();</span>
+<span class="nc" id="L31">    }</span>
+
+    final void setProperties() {
+<span class="nc" id="L34">        caloriesAxis.setLabel(&quot;Calories&quot;);</span>
+<span class="nc" id="L35">        weightAxis.setLabel(&quot;Weight (kg)&quot;);</span>
+<span class="nc" id="L36">        chart.setTitle(&quot;Calories par rapport au poids (kg)&quot;);</span>
+<span class="nc" id="L37">        setText(&quot;Caloriespar rapport au poids&quot;);</span>
+<span class="nc" id="L38">    }</span>
+
+    void addMale(double calories, double kg) {
+<span class="nc" id="L41">        System.out.println(&quot;ajout calories male&quot;);</span>
+<span class="nc" id="L42">        male.getData().add(new XYChart.Data&lt;&gt;(calories, kg));</span>
+<span class="nc" id="L43">    }</span>
+
+    void addFemale(double calories, double kg) {
+<span class="nc" id="L46">        female.getData().add(new XYChart.Data&lt;&gt;(calories, kg));</span>
+<span class="nc" id="L47">    }</span>
+
+    final void addSeries() {
+<span class="nc" id="L50">        chart.getData().addAll(male, female);</span>
+<span class="nc" id="L51">    }</span>
+
+    final void addContent() {
+<span class="nc" id="L54">        addSeries();</span>
+<span class="nc" id="L55">        this.setContent(chart);</span>
+<span class="nc" id="L56">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

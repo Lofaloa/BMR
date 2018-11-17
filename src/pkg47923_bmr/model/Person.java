@@ -3,7 +3,8 @@ package pkg47923_bmr.model;
 import java.util.Observable;
 
 /**
- * Contains useful methods for the basal metabolic rate calculation.
+ * Represents a person able to get her/ his BMR and her/his amount of needed
+ * calories calculated.
  *
  * @author g47923
  */
@@ -14,40 +15,70 @@ public class Person extends Observable {
     private int age;
     private double weight;
     private double height;
-    private boolean isWoman;
+    private boolean isFemale;
     private LifeStyle lifestyle;
 
     /**
-     * Initializes this model bmr and calories to 0.
-     */
-    public Person() {
-        this.bmr = 0;
-        this.calories = 0;
-    }
-
-    /**
-     * Get
+     * Gets this person BMR.
      *
-     * @return
+     * @return this person BMR.
      */
     public double getBmr() {
         return bmr;
     }
 
+    /**
+     * Gets this person amount of needed calories.
+     *
+     * @return this person amount of needed calories.
+     */
     public double getCalories() {
         return calories;
     }
 
+    /**
+     * Gets this person age.
+     *
+     * @return this person age.
+     */
+    public int getAge() {
+        return age;
+    }
+
+    /**
+     * Gets this person weight.
+     *
+     * @return this person weight.
+     */
     public double getWeight() {
         return weight;
     }
 
+    /**
+     * Gets this person height.
+     *
+     * @return this person height.
+     */
     public double getHeight() {
         return height;
     }
 
-    public boolean isWoman() {
-        return isWoman;
+    /**
+     * Indicates if this person is female.
+     *
+     * @return true if this person is female.
+     */
+    public boolean isFemale() {
+        return isFemale;
+    }
+
+    /**
+     * Gets this person life style.
+     *
+     * @return this person life style.
+     */
+    public LifeStyle getLifeStyle() {
+        return lifestyle;
     }
 
     /**
@@ -65,7 +96,7 @@ public class Person extends Observable {
         this.height = height;
         this.age = age;
         this.lifestyle = lifeStyle;
-        this.isWoman = isWoman;
+        this.isFemale = isWoman;
         setBmr(isWoman, weight, height, age);
         setCalories(lifeStyle);
         notifyView();
@@ -93,10 +124,6 @@ public class Person extends Observable {
      * @param lifeStyle is a given lifestyle.
      */
     private void setCalories(LifeStyle lifeStyle) {
-        if (this.bmr == 0) {
-            throw new IllegalStateException("BMR has not been calculated.");
-        }
-        System.out.println(bmr);
         this.calories = lifeStyle.getFactor() * this.bmr;
     }
 

@@ -70,7 +70,7 @@ public class MainPane extends BorderPane implements Observer {
                                        user.getCalories(),
                                        user.getWeight(),
                                        user.getHeight(),
-                                       user.isWoman());
+                                       user.isFemale());
     }
 
 }

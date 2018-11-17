@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>MainPane.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;47923_BMR&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">pkg47923_bmr.view</a> &gt; <span class="el_source">MainPane.java</span></div><h1>MainPane.java</h1><pre class="source lang-java linenums">package pkg47923_bmr.view;
+
+import java.util.Observable;
+import java.util.Observer;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
+import javafx.scene.layout.BorderPane;
+import pkg47923_bmr.model.Person;
+
+/**
+ * Represents the main layout of this window.
+ *
+ * @author g47923
+ */
+public class MainPane extends BorderPane implements Observer {
+
+    private final MenuBar menuBar;
+    private final DataResultBox data;
+    private final ChartsPane representation;
+    private final Person user;
+
+    /**
+     * Initializes this main pane with a user.
+     *
+     * @param user is the user to represent.
+     */
+<span class="nc" id="L30">    public MainPane(Person user) {</span>
+<span class="nc" id="L31">        this.user = user;</span>
+<span class="nc" id="L32">        this.data = new DataResultBox(user);</span>
+<span class="nc" id="L33">        this.representation = new ChartsPane();</span>
+<span class="nc" id="L34">        this.menuBar = new MenuBar();</span>
+<span class="nc" id="L35">        setMenu();</span>
+<span class="nc" id="L36">        addContent();</span>
+<span class="nc" id="L37">    }</span>
+
+    /**
+     * Initializes the menu bar with a &quot;&lt;i&gt;File&lt;/i&gt;&quot; menu. The unique menu
+     * allows the user to quit this program.
+     */
+    final void setMenu() {
+<span class="nc" id="L44">        Menu file = new Menu(&quot;File&quot;);</span>
+<span class="nc" id="L45">        MenuItem exit = new MenuItem(&quot;Exit&quot;);</span>
+<span class="nc" id="L46">        exit.setOnAction(new EventHandler&lt;ActionEvent&gt;() {</span>
+            @Override
+            public void handle(ActionEvent event) {
+<span class="nc" id="L49">                System.exit(0);</span>
+<span class="nc" id="L50">            }</span>
+        });
+<span class="nc" id="L52">        file.getItems().add(exit);</span>
+<span class="nc" id="L53">        menuBar.getMenus().add(file);</span>
+<span class="nc" id="L54">    }</span>
+
+    /**
+     * Adds content to this pane. This pane contains a menu bar, the data and
+     * its representation.
+     */
+    final void addContent() {
+<span class="nc" id="L61">        this.setTop(menuBar);</span>
+<span class="nc" id="L62">        this.setLeft(data);</span>
+<span class="nc" id="L63">        this.setRight(representation);</span>
+<span class="nc" id="L64">    }</span>
+
+    @Override
+    public void update(Observable o, Object arg) {
+<span class="nc" id="L68">        data.update();</span>
+<span class="nc" id="L69">        representation.addDataToCharts(user.getBmr(),</span>
+<span class="nc" id="L70">                                       user.getCalories(),</span>
+<span class="nc" id="L71">                                       user.getWeight(),</span>
+<span class="nc" id="L72">                                       user.getHeight(),</span>
+<span class="nc" id="L73">                                       user.isFemale());</span>
+<span class="nc" id="L74">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

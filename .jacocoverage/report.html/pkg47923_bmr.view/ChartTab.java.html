@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>ChartTab.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;47923_BMR&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">pkg47923_bmr.view</a> &gt; <span class="el_source">ChartTab.java</span></div><h1>ChartTab.java</h1><pre class="source lang-java linenums">package pkg47923_bmr.view;
+
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
+import javafx.scene.control.Tab;
+
+/**
+ * Represents a tab that contains a line chart.
+ *
+ * @author g47923
+ */
+public class ChartTab extends Tab {
+
+    private final NumberAxis xAxis;
+    private final NumberAxis yAxis;
+    private final LineChart&lt;Number, Number&gt; chart;
+    private final XYChart.Series male;
+    private final XYChart.Series female;
+
+    /**
+     * Initializes this tab of the given title with its axis named after the
+     * given axis labels.
+     *
+     * @param title is the title of this tab.
+     * @param xAxisLabel is the x axis name.
+     * @param yAxisLabel is the y axis name.
+     */
+<span class="nc" id="L29">    public ChartTab(String title, String xAxisLabel, String yAxisLabel) {</span>
+<span class="nc" id="L30">        this.xAxis = new NumberAxis();</span>
+<span class="nc" id="L31">        this.yAxis = new NumberAxis();</span>
+<span class="nc" id="L32">        this.chart = new LineChart&lt;&gt;(xAxis, yAxis);</span>
+<span class="nc" id="L33">        this.male = new XYChart.Series&lt;&gt;();</span>
+<span class="nc" id="L34">        this.female = new XYChart.Series&lt;&gt;();</span>
+<span class="nc" id="L35">        addContent();</span>
+<span class="nc" id="L36">        setProperties(title, xAxisLabel, yAxisLabel);</span>
+<span class="nc" id="L37">    }</span>
+
+    /**
+     * Sets the properties of this tab.
+     *
+     * @param title is this title tab.
+     * @param xAxisLabel is this x axis name.
+     * @param yAxisLabel is this y axis name.
+     */
+    private void setProperties(String title, String xAxisLabel, String yAxisLabel) {
+<span class="nc" id="L47">        xAxis.setLabel(xAxisLabel);</span>
+<span class="nc" id="L48">        yAxis.setLabel(yAxisLabel);</span>
+<span class="nc" id="L49">        this.male.setName(&quot;Homme&quot;);</span>
+<span class="nc" id="L50">        this.female.setName(&quot;Femme&quot;);</span>
+<span class="nc" id="L51">        chart.setTitle(title);</span>
+<span class="nc" id="L52">        setText(title);</span>
+<span class="nc" id="L53">        setClosable(false);</span>
+<span class="nc" id="L54">    }</span>
+
+    /**
+     * Adds a point in this tab chart at the given coordinates in the male line.
+     *
+     * @param x is the x coordinate of the new data.
+     * @param y is the y coordinate of the new data.
+     */
+    void addMale(double x, double y) {
+<span class="nc" id="L63">        male.getData().add(new XYChart.Data&lt;&gt;(x, y));</span>
+<span class="nc" id="L64">    }</span>
+
+    /**
+     * Adds a point in this tab chart at the given coordinates in the female
+     * line.
+     *
+     * @param x is the x coordinate of the new data.
+     * @param y is the y coordinate of the new data.
+     */
+    void addFemale(double x, double y) {
+<span class="nc" id="L74">        female.getData().add(new XYChart.Data&lt;&gt;(x, y));</span>
+<span class="nc" id="L75">    }</span>
+
+    private void addSeries() {
+<span class="nc" id="L78">        chart.getData().addAll(male, female);</span>
+<span class="nc" id="L79">    }</span>
+
+    private void addContent() {
+<span class="nc" id="L82">        addSeries();</span>
+<span class="nc" id="L83">        this.setContent(chart);</span>
+<span class="nc" id="L84">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

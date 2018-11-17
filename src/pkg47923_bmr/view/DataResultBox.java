@@ -66,7 +66,6 @@ public class DataResultBox extends VBox {
         clear.addEventHandler(ActionEvent.ACTION, new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("clearing");
                 content.clear();
             }
         });

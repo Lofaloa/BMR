@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Person.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;47923_BMR&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">pkg47923_bmr.model</a> &gt; <span class="el_source">Person.java</span></div><h1>Person.java</h1><pre class="source lang-java linenums">package pkg47923_bmr.model;
+
+import java.util.Observable;
+
+/**
+ * Represents a person able to get her/ his BMR and her/his amount of needed
+ * calories calculated.
+ *
+ * @author g47923
+ */
+<span class="fc" id="L11">public class Person extends Observable {</span>
+
+    private double bmr;
+    private double calories;
+    private int age;
+    private double weight;
+    private double height;
+    private boolean isFemale;
+    private LifeStyle lifestyle;
+
+    /**
+     * Gets this person BMR.
+     *
+     * @return this person BMR.
+     */
+    public double getBmr() {
+<span class="fc" id="L27">        return bmr;</span>
+    }
+
+    /**
+     * Gets this person amount of needed calories.
+     *
+     * @return this person amount of needed calories.
+     */
+    public double getCalories() {
+<span class="fc" id="L36">        return calories;</span>
+    }
+
+    /**
+     * Gets this person age.
+     *
+     * @return this person age.
+     */
+    public int getAge() {
+<span class="fc" id="L45">        return age;</span>
+    }
+
+    /**
+     * Gets this person weight.
+     *
+     * @return this person weight.
+     */
+    public double getWeight() {
+<span class="fc" id="L54">        return weight;</span>
+    }
+
+    /**
+     * Gets this person height.
+     *
+     * @return this person height.
+     */
+    public double getHeight() {
+<span class="fc" id="L63">        return height;</span>
+    }
+
+    /**
+     * Indicates if this person is female.
+     *
+     * @return true if this person is female.
+     */
+    public boolean isFemale() {
+<span class="fc" id="L72">        return isFemale;</span>
+    }
+
+    /**
+     * Gets this person life style.
+     *
+     * @return this person life style.
+     */
+    public LifeStyle getLifeStyle() {
+<span class="fc" id="L81">        return lifestyle;</span>
+    }
+
+    /**
+     * Calculates this person data.
+     *
+     * @param isWoman tell if this person is a woman.
+     * @param weight the weight of this person.
+     * @param height the size of this person.
+     * @param age the age of this person.
+     * @param lifeStyle the life style of this person.
+     */
+    public void setData(boolean isWoman, double weight, double height, int age,
+            LifeStyle lifeStyle) {
+<span class="fc" id="L95">        this.weight = weight;</span>
+<span class="fc" id="L96">        this.height = height;</span>
+<span class="fc" id="L97">        this.age = age;</span>
+<span class="fc" id="L98">        this.lifestyle = lifeStyle;</span>
+<span class="fc" id="L99">        this.isFemale = isWoman;</span>
+<span class="fc" id="L100">        setBmr(isWoman, weight, height, age);</span>
+<span class="fc" id="L101">        setCalories(lifeStyle);</span>
+<span class="fc" id="L102">        notifyView();</span>
+<span class="fc" id="L103">    }</span>
+
+    /**
+     * Calculates someone's basal metabolic rate.
+     *
+     * @param isWoman is true if the subject is a woman.
+     * @param weight is the weight of the subject.
+     * @param size is the size of the subject.
+     * @param age is the age of the subject.
+     */
+    private void setBmr(boolean isWoman, double weight, double size, int age) {
+<span class="fc bfc" id="L114" title="All 2 branches covered.">        if (isWoman) {</span>
+<span class="fc" id="L115">            this.bmr = womanBMR(weight, size, age);</span>
+        } else {
+<span class="fc" id="L117">            this.bmr = manBMR(weight, size, age);</span>
+        }
+<span class="fc" id="L119">    }</span>
+
+    /**
+     * Calculates the number of calories needed given a basal metabolic rate.
+     *
+     * @param lifeStyle is a given lifestyle.
+     */
+    private void setCalories(LifeStyle lifeStyle) {
+<span class="fc" id="L127">        this.calories = lifeStyle.getFactor() * this.bmr;</span>
+<span class="fc" id="L128">    }</span>
+
+    /**
+     * Calculates a basal metabolic rate for a woman.
+     *
+     * @param weight is the weight of the woman.
+     * @param size is the size of the woman.
+     * @param age is the age of the woman.
+     * @return a basal metabolic rate for a woman.
+     */
+    double womanBMR(double weight, double size, int age) {
+<span class="fc" id="L139">        return 9.6 * weight + 1.8 * size - 4.7 * age + 655;</span>
+    }
+
+    /**
+     * Calculates a basal metabolic rate for a man.
+     *
+     * @param weight is the weight of the man.
+     * @param size is the size of the man.
+     * @param age is the age of the man.
+     * @return a basal metabolic rate for a man.
+     */
+    double manBMR(double weight, double size, int age) {
+<span class="fc" id="L151">        return 13.7 * weight + 5 * size - 6.8 * age + 66;</span>
+    }
+
+    /**
+     * Notifies the view.
+     */
+    private void notifyView() {
+<span class="fc" id="L158">        setChanged();</span>
+<span class="fc" id="L159">        notifyObservers();</span>
+<span class="fc" id="L160">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

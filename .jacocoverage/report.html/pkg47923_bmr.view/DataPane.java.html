@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>DataPane.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;47923_BMR&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">pkg47923_bmr.view</a> &gt; <span class="el_source">DataPane.java</span></div><h1>DataPane.java</h1><pre class="source lang-java linenums">package pkg47923_bmr.view;
+
+import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.scene.text.Font;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.GridPane;
+import pkg47923_bmr.model.LifeStyle;
+
+/**
+ * Contains the components managing user data.
+ *
+ * @author g47923
+ */
+class DataPane extends GridPane {
+
+    private final Label title;
+    private final Label sizeLabel;
+    private final TextField size;
+    private final Label weightLabel;
+    private final TextField weight;
+    private final Label ageLabel;
+    private final TextField age;
+    private final Label sexeLabel;
+    private final ToggleGroup gender;
+    private final RadioButton female;
+    private final RadioButton male;
+    private final Label lifeStyleLabel;
+    private final ComboBox&lt;LifeStyle&gt; lifestyle;
+
+    /**
+     * Initializes this pane with user controls for his/ her size, weight, age,
+     * sex and lifestyle.
+     */
+<span class="nc" id="L40">    public DataPane() {</span>
+<span class="nc" id="L41">        this.title = new Label(&quot;Données&quot;);</span>
+<span class="nc" id="L42">        this.sizeLabel = new Label(&quot;Taille (cm)&quot;);</span>
+<span class="nc" id="L43">        this.size = new TextField();</span>
+<span class="nc" id="L44">        this.weightLabel = new Label(&quot;Poids (kg)&quot;);</span>
+<span class="nc" id="L45">        this.weight = new TextField();</span>
+<span class="nc" id="L46">        this.ageLabel = new Label(&quot;Âge&quot;);</span>
+<span class="nc" id="L47">        this.age = new TextField();</span>
+<span class="nc" id="L48">        this.sexeLabel = new Label(&quot;Genre&quot;);</span>
+<span class="nc" id="L49">        this.gender = new ToggleGroup();</span>
+<span class="nc" id="L50">        this.female = new RadioButton(&quot;Femme&quot;);</span>
+<span class="nc" id="L51">        this.male = new RadioButton(&quot;Homme&quot;);</span>
+<span class="nc" id="L52">        this.lifeStyleLabel = new Label(&quot;Style de vie&quot;);</span>
+<span class="nc" id="L53">        this.lifestyle = new ComboBox&lt;&gt;();</span>
+<span class="nc" id="L54">        setGridProperties();</span>
+<span class="nc" id="L55">        setComponentsProperties();</span>
+<span class="nc" id="L56">        addComponents();</span>
+<span class="nc" id="L57">        setHandlers();</span>
+<span class="nc" id="L58">    }</span>
+
+    /**
+     * Gets the size typed by the user.
+     *
+     * @return the size typed by the user.
+     */
+    double getSize() {
+<span class="nc bnc" id="L66" title="All 2 branches missed.">        if (size.getText().isEmpty()) {</span>
+<span class="nc" id="L67">            throw new IllegalStateException(&quot;Taille nécessaire&quot;);</span>
+        }
+<span class="nc bnc" id="L69" title="All 2 branches missed.">        if (!size.getText().matches(&quot;-?\\d+(\\.\\d+)?&quot;)) {</span>
+<span class="nc" id="L70">            throw new IllegalArgumentException(&quot;La taille doit être une donnée &quot;</span>
+                    + &quot;numérique&quot;);
+        }
+<span class="nc bnc" id="L73" title="All 2 branches missed.">        if (Double.parseDouble(size.getText()) &lt; 50</span>
+<span class="nc bnc" id="L74" title="All 2 branches missed.">                || 300 &lt; Double.parseDouble(size.getText())) {</span>
+<span class="nc" id="L75">            throw new IllegalArgumentException(&quot;Taille invalide, doit être &quot;</span>
+                    + &quot;comprise entre 50 et 300 cm.&quot;);
+        }
+<span class="nc" id="L78">        return Double.parseDouble(size.getText());</span>
+    }
+
+    /**
+     * Gets the weight typed by the user.
+     *
+     * @return the weight typed by the user.
+     */
+    double getWeight() {
+<span class="nc bnc" id="L87" title="All 2 branches missed.">        if (weight.getText().isEmpty()) {</span>
+<span class="nc" id="L88">            throw new IllegalStateException(&quot;Poids nécessaire.&quot;);</span>
+        }
+<span class="nc bnc" id="L90" title="All 2 branches missed.">        if (!weight.getText().matches(&quot;-?\\d+(\\.\\d+)?&quot;)) {</span>
+<span class="nc" id="L91">            throw new IllegalArgumentException(&quot;Le poids doit être une valeur &quot;</span>
+                    + &quot;numérique.&quot;);
+        }
+<span class="nc bnc" id="L94" title="All 2 branches missed.">        if (Double.parseDouble(weight.getText()) &lt;= 1) {</span>
+<span class="nc" id="L95">            throw new IllegalArgumentException(&quot;Poids invalide, doit être&quot;</span>
+                    + &quot; supérieur à 1 kg.&quot;);
+        }
+<span class="nc" id="L98">        return Double.parseDouble(weight.getText());</span>
+    }
+
+    /**
+     * Gets the weight typed by the user.
+     *
+     * @return the weight typed by the user.
+     */
+    int getAge() {
+<span class="nc bnc" id="L107" title="All 2 branches missed.">        if (size.getText().isEmpty()) {</span>
+<span class="nc" id="L108">            throw new IllegalStateException(&quot;Âge nécessaire.&quot;);</span>
+        }
+<span class="nc bnc" id="L110" title="All 2 branches missed.">        if (!size.getText().matches(&quot;^\\d+$&quot;)) {</span>
+<span class="nc" id="L111">            throw new IllegalArgumentException(&quot;L'âge doit être une valeur &quot;</span>
+                    + &quot;numérique.&quot;);
+        }
+<span class="nc bnc" id="L114" title="All 2 branches missed.">        if (Double.parseDouble(size.getText()) &lt;= 1) {</span>
+<span class="nc" id="L115">            throw new IllegalArgumentException(&quot;Âge invalide, doit être supérieur&quot;</span>
+                    + &quot; ou égal à 1 an.&quot;);
+        }
+<span class="nc" id="L118">        return Integer.parseInt(age.getText());</span>
+    }
+
+    /**
+     * Gets the gender selected by the user.
+     *
+     * @return the gender selected by the user.
+     */
+    String getGender() {
+<span class="nc" id="L127">        RadioButton selectedGender = (RadioButton) gender.getSelectedToggle();</span>
+<span class="nc" id="L128">        return selectedGender.getText();</span>
+    }
+
+    /**
+     * Gets the life style selected by the user.
+     *
+     * @return the life style selected by the user.
+     */
+    LifeStyle getLifeStyle() {
+<span class="nc bnc" id="L137" title="All 2 branches missed.">        if (lifestyle.getSelectionModel().isEmpty()) {</span>
+<span class="nc" id="L138">            throw new IllegalStateException(&quot;Style de vie nécessaire.&quot;);</span>
+        }
+<span class="nc" id="L140">        return lifestyle.getValue();</span>
+    }
+
+    /**
+     * Clears the data.
+     */
+    void clear() {
+<span class="nc" id="L147">        size.clear();</span>
+<span class="nc" id="L148">        weight.clear();</span>
+<span class="nc" id="L149">        age.clear();</span>
+<span class="nc" id="L150">        gender.selectToggle(female);</span>
+<span class="nc" id="L151">        lifestyle.valueProperty().set(null);</span>
+<span class="nc" id="L152">    }</span>
+
+    /**
+     * Sets the properties of this grid.
+     */
+    final void setGridProperties() {
+<span class="nc" id="L158">        this.setVgap(10);</span>
+<span class="nc" id="L159">        this.setHgap(10);</span>
+<span class="nc" id="L160">        this.setPadding(new Insets(10, 10, 10, 10));</span>
+<span class="nc" id="L161">    }</span>
+
+    /**
+     * Sets the properties for all this pane components.
+     */
+    final void setComponentsProperties() {
+<span class="nc" id="L167">        this.title.setUnderline(true);</span>
+<span class="nc" id="L168">        this.title.setFont(new Font(&quot;Arial&quot;, 16));</span>
+<span class="nc" id="L169">        this.size.setPromptText(&quot;Taille en centimètres...&quot;);</span>
+<span class="nc" id="L170">        this.weight.setPromptText(&quot;Poids en kilogrammes...&quot;);</span>
+<span class="nc" id="L171">        this.age.setPromptText(&quot;Âge...&quot;);</span>
+<span class="nc" id="L172">        this.female.setSelected(true);</span>
+<span class="nc" id="L173">        this.lifestyle.setPromptText(&quot;Choix du style de vie...&quot;);</span>
+<span class="nc" id="L174">    }</span>
+
+    /**
+     * Adds all the components to this pane.
+     */
+    final void addComponents() {
+<span class="nc" id="L180">        this.add(title, 1, 0);</span>
+<span class="nc" id="L181">        this.add(sizeLabel, 1, 1);</span>
+<span class="nc" id="L182">        this.add(size, 2, 1);</span>
+<span class="nc" id="L183">        this.add(weightLabel, 1, 2);</span>
+<span class="nc" id="L184">        this.add(weight, 2, 2);</span>
+<span class="nc" id="L185">        this.add(ageLabel, 1, 3);</span>
+<span class="nc" id="L186">        this.add(age, 2, 3);</span>
+<span class="nc" id="L187">        this.add(sexeLabel, 1, 4);</span>
+<span class="nc" id="L188">        female.setToggleGroup(gender);</span>
+<span class="nc" id="L189">        male.setToggleGroup(gender);</span>
+<span class="nc" id="L190">        this.add(female, 2, 4);</span>
+<span class="nc" id="L191">        this.add(male, 2, 5);</span>
+<span class="nc" id="L192">        this.add(lifeStyleLabel, 1, 6);</span>
+<span class="nc" id="L193">        this.lifestyle.getItems().addAll(LifeStyle.EXTREMELY_ACTIVE,</span>
+                LifeStyle.VERY_ACTIVE,
+                LifeStyle.ACTIVE,
+                LifeStyle.NOT_MUCH_ACTIVE,
+                LifeStyle.SEDENTARY);
+<span class="nc" id="L198">        this.add(lifestyle, 2, 6);</span>
+<span class="nc" id="L199">    }</span>
+
+    /**
+     * Sets this pane text fields handler.
+     */
+    final void setHandlers() {
+<span class="nc" id="L205">        this.addEventFilter(KeyEvent.KEY_TYPED, new EventHandler&lt;KeyEvent&gt;() {</span>
+            @Override
+            public void handle(KeyEvent event) {
+<span class="nc bnc" id="L208" title="All 2 branches missed.">                if (!Character.isDigit(event.getCharacter().charAt(0))) {</span>
+<span class="nc" id="L209">                    event.consume();</span>
+                }
+<span class="nc" id="L211">            }</span>
+        });
+<span class="nc" id="L213">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

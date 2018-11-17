@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>DataResultBox.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;47923_BMR&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">pkg47923_bmr.view</a> &gt; <span class="el_source">DataResultBox.java</span></div><h1>DataResultBox.java</h1><pre class="source lang-java linenums">package pkg47923_bmr.view;
+
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.layout.VBox;
+import pkg47923_bmr.model.Person;
+
+/**
+ * Represents the box the managing the
+ *
+ * @author g47923
+ */
+public class DataResultBox extends VBox {
+
+<span class="nc" id="L18">    private final int WINDOW_HEIGHT = 200;</span>
+<span class="nc" id="L19">    private final int WINDOW_WIDTH = 500;</span>
+
+    private final Content content;
+    private final Button submit;
+    private final Button clear;
+
+    private final Person user;
+
+<span class="nc" id="L27">    public DataResultBox(Person user) {</span>
+<span class="nc" id="L28">        this.user = user;</span>
+<span class="nc" id="L29">        this.content = new Content();</span>
+<span class="nc" id="L30">        this.submit = new Button(&quot;Calculer mon BMR&quot;);</span>
+<span class="nc" id="L31">        this.clear = new Button(&quot;Clear&quot;);</span>
+<span class="nc" id="L32">        addSubmitEventHandler();</span>
+<span class="nc" id="L33">        addClearEventHandler();</span>
+<span class="nc" id="L34">        setBoxProperties();</span>
+<span class="nc" id="L35">        setComponentsProperties();</span>
+<span class="nc" id="L36">        addComponents();</span>
+<span class="nc" id="L37">    }</span>
+
+    /**
+     * Sets this pane properties.
+     */
+    final void setBoxProperties() {
+<span class="nc" id="L43">        setSpacing(15);</span>
+<span class="nc" id="L44">        setPadding(new Insets(0, 10, 0, 10));</span>
+<span class="nc" id="L45">    }</span>
+
+    private void addSubmitEventHandler() {
+<span class="nc" id="L48">        submit.setOnAction((ActionEvent event) -&gt; {</span>
+            try {
+<span class="nc" id="L50">                user.setData(content.getGender().equals(&quot;Femme&quot;),</span>
+<span class="nc" id="L51">                        content.getWeight(),</span>
+<span class="nc" id="L52">                        content.getSize(),</span>
+<span class="nc" id="L53">                        content.getAge(),</span>
+<span class="nc" id="L54">                        content.getLifeStyle());</span>
+<span class="nc" id="L55">            } catch (IllegalStateException | IllegalArgumentException ex) {</span>
+<span class="nc" id="L56">                Alert fail = new Alert(Alert.AlertType.WARNING);</span>
+<span class="nc" id="L57">                fail.setHeaderText(&quot;Valeur erronée!&quot;);</span>
+<span class="nc" id="L58">                fail.setContentText(ex.getMessage());</span>
+<span class="nc" id="L59">                fail.showAndWait();</span>
+<span class="nc" id="L60">            }</span>
+<span class="nc" id="L61">            event.consume();</span>
+<span class="nc" id="L62">        });</span>
+<span class="nc" id="L63">    }</span>
+
+    private void addClearEventHandler() {
+<span class="nc" id="L66">        clear.addEventHandler(ActionEvent.ACTION, new EventHandler&lt;ActionEvent&gt;() {</span>
+            @Override
+            public void handle(ActionEvent event) {
+<span class="nc" id="L69">                content.clear();</span>
+<span class="nc" id="L70">            }</span>
+        });
+<span class="nc" id="L72">    }</span>
+
+    /**
+     * Sets the components properties of this pane.
+     */
+    private void setComponentsProperties() {
+<span class="nc" id="L78">        submit.setMinWidth(600);</span>
+<span class="nc" id="L79">        clear.setMinWidth(600);</span>
+<span class="nc" id="L80">    }</span>
+
+    /**
+     * Adds the components to this pane.
+     */
+    private void addComponents() {
+<span class="nc" id="L86">        this.getChildren().addAll(content, submit, clear);</span>
+<span class="nc" id="L87">    }</span>
+
+    /**
+     * Updates the content of this pane.
+     */
+    void update() {
+<span class="nc" id="L93">        content.setBMR(user.getBmr());</span>
+<span class="nc" id="L94">        content.setCalories(user.getCalories());</span>
+<span class="nc" id="L95">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>
