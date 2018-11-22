@@ -1,14 +1,17 @@
 package pkg47923_bmr.view;
 
+import java.util.Observable;
+import java.util.Observer;
 import javafx.scene.layout.HBox;
 import pkg47923_bmr.model.LifeStyle;
+import pkg47923_bmr.model.Person;
 
 /**
  * Contains the content.
  *
  * @author g47923
  */
-class Content extends HBox {
+class Content extends HBox implements Observer {
 
     private final DataPane data;
     private final ResultPane result;
@@ -19,6 +22,7 @@ class Content extends HBox {
     public Content() {
         this.data = new DataPane();
         this.result = new ResultPane();
+        
         addContent();
     }
 
@@ -98,6 +102,13 @@ class Content extends HBox {
     void clear() {
         data.clear();
         result.clear();
+    }
+
+    @Override
+    public void update(Observable o, Object o1) {
+        Person user = (Person) o;
+        result.setBMR(user.getBmr());
+        result.setCalories(user.getCalories());
     }
 
 }

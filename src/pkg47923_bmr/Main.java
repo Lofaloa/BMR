@@ -15,7 +15,6 @@ public class Main extends Application {
             primaryStage.setTitle("Basal Metabolic Rate Calculator");
             Person user = new Person();
             MainPane main = new MainPane(user);
-            user.addObserver(main);
             Scene scene = new Scene(main);
             primaryStage.setScene(scene);
             primaryStage.show();

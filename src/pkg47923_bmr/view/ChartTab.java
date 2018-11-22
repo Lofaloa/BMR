@@ -1,9 +1,12 @@
 package pkg47923_bmr.view;
 
+import java.util.Observable;
+import java.util.Observer;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Tab;
+import pkg47923_bmr.model.Person;
 
 /**
  * Represents a tab that contains a line chart.

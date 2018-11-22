@@ -1,6 +1,9 @@
 package pkg47923_bmr.view;
 
+import java.util.Observable;
+import java.util.Observer;
 import javafx.scene.control.TabPane;
+import pkg47923_bmr.model.Person;
 
 /**
  * Represents a pane of tabs that contains 3 charts: BMR vs weight, calories vs
@@ -8,7 +11,7 @@ import javafx.scene.control.TabPane;
  *
  * @author g47923
  */
-public class ChartsPane extends TabPane {
+public class ChartsPane extends TabPane implements Observer {
 
     private final ChartTab bmrWeightChartTab;
     private final ChartTab caloriesWeightChartTab;
@@ -36,7 +39,7 @@ public class ChartsPane extends TabPane {
      * @param height is the height of the new data.
      * @param isFemale true if the data should be added to the female line.
      */
-    void addDataToCharts(double bmr, double calories, double weight,
+    private void addDataToCharts(double bmr, double calories, double weight,
             double height, boolean isFemale) {
         addDataTo(bmrWeightChartTab, weight, bmr, isFemale);
         addDataTo(caloriesWeightChartTab, weight, calories, isFemale);
@@ -59,9 +62,19 @@ public class ChartsPane extends TabPane {
         }
     }
 
-    final void addContent() {
+    private void addContent() {
         this.getTabs().addAll(bmrWeightChartTab, caloriesWeightChartTab,
                 bmrHeightChartTab);
     }
 
+    @Override
+    public void update(Observable o, Object o1) {
+        Person user = (Person) o;
+        addDataToCharts(user.getBmr(), 
+                user.getCalories(), 
+                user.getWeight(),
+                user.getHeight(),
+                user.isFemale());
+    }    
+    
 }

@@ -15,7 +15,7 @@ import pkg47923_bmr.model.Person;
  *
  * @author g47923
  */
-public class MainPane extends BorderPane implements Observer {
+public class MainPane extends BorderPane {
 
     private final MenuBar menuBar;
     private final DataResultBox data;
@@ -32,6 +32,7 @@ public class MainPane extends BorderPane implements Observer {
         this.data = new DataResultBox(user);
         this.representation = new ChartsPane();
         this.menuBar = new MenuBar();
+        user.addObserver(representation);
         setMenu();
         addContent();
     }
@@ -61,16 +62,6 @@ public class MainPane extends BorderPane implements Observer {
         this.setTop(menuBar);
         this.setLeft(data);
         this.setRight(representation);
-    }
-
-    @Override
-    public void update(Observable o, Object arg) {
-        data.update();
-        representation.addDataToCharts(user.getBmr(),
-                                       user.getCalories(),
-                                       user.getWeight(),
-                                       user.getHeight(),
-                                       user.isFemale());
     }
 
 }

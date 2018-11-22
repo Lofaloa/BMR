@@ -15,9 +15,6 @@ import pkg47923_bmr.model.Person;
  */
 public class DataResultBox extends VBox {
 
-    private final int WINDOW_HEIGHT = 200;
-    private final int WINDOW_WIDTH = 500;
-
     private final Content content;
     private final Button submit;
     private final Button clear;
@@ -29,6 +26,7 @@ public class DataResultBox extends VBox {
         this.content = new Content();
         this.submit = new Button("Calculer mon BMR");
         this.clear = new Button("Clear");
+        user.addObserver(content);
         addSubmitEventHandler();
         addClearEventHandler();
         setBoxProperties();
