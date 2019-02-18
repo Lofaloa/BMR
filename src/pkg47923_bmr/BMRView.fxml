@@ -35,15 +35,15 @@
                   <Label text="Age" GridPane.rowIndex="3" />
                   <Label text="Sexe" GridPane.rowIndex="4" />
                   <Label text="Style de vie" GridPane.rowIndex="5" />
-                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <ComboBox prefWidth="150.0" promptText="Styles de vie..." GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <TextField fx:id="size" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField fx:id="weight" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextField fx:id="age" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <ComboBox fx:id="lifestyle" prefWidth="150.0" promptText="Styles de vie..." GridPane.columnIndex="1" GridPane.rowIndex="5" />
                   <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                      <children>
                         <RadioButton mnemonicParsing="false" text="Homme">
                            <toggleGroup>
-                              <ToggleGroup fx:id="genre" />
+                              <ToggleGroup fx:id="gender" />
                            </toggleGroup>
                         </RadioButton>
                         <RadioButton mnemonicParsing="false" text="Femme" toggleGroup="$genre">
@@ -79,8 +79,8 @@
                   </Label>
                   <Label text="BMR" GridPane.rowIndex="1" />
                   <Label text="Calories" GridPane.rowIndex="2" />
-                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextField fx:id="bmr" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField fx:id="calories" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                </children>
                <HBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -88,7 +88,7 @@
             </GridPane>
          </children>
       </HBox>
-      <Button fx:id="calculate" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Calculer mon BMR" textAlignment="CENTER" VBox.vgrow="NEVER">
+      <Button fx:id="calculate" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Calculer mon BMR" textAlignment="CENTER" VBox.vgrow="NEVER" onAction="#handleCalculate">
          <VBox.margin>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </VBox.margin>
