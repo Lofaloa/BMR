@@ -24,6 +24,8 @@ public class Main extends Application {
 //            System.err.println(ex.getMessage());
 //            Platform.exit();
 //        }
+
+// ------------- Vue FXML -------------
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("BMRView.fxml"));

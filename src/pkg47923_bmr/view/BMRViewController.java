@@ -41,6 +41,7 @@ public class BMRViewController implements Initializable {
     private TextField calories;
 
     public BMRViewController(Person user) {
+        System.out.println("Constructor of bmr is run");
         this.user = user;
     }
 
